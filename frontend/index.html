@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EduEscape - Learn Through Play</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <h1>🎮 EduEscape</h1>
+            <p class="tagline">Transform Your Textbooks Into Adventures</p>
+        </header>
+
+        <!-- Upload Screen -->
+        <div id="upload-screen" class="screen active">
+            <div class="card">
+                <h2>📚 Upload Your Textbook PDF</h2>
+                <p>Upload a PDF to start your learning journey!</p>
+                
+                <div class="upload-area">
+                    <input type="file" id="pdf-file" accept=".pdf" />
+                    <label for="pdf-file" class="upload-label">
+                        <span>📄 Choose PDF File</span>
+                    </label>
+                </div>
+                
+                <button id="upload-btn" class="btn btn-primary">Upload & Generate Levels</button>
+                
+                <div id="upload-status" class="status-message"></div>
+            </div>
+        </div>
+
+        <!-- Level Selection Screen -->
+        <div id="level-select-screen" class="screen">
+            <div class="card">
+                <h2>🗺️ Select Your Level</h2>
+                <p>Choose a level to start learning</p>
+                
+                <div id="levels-list" class="levels-grid"></div>
+                
+                <button id="view-analytics-btn" class="btn btn-secondary">📊 View Analytics</button>
+                <button id="reset-btn" class="btn btn-danger">🔄 Reset Progress</button>
+            </div>
+        </div>
+
+        <!-- Level Play Screen -->
+        <div id="level-play-screen" class="screen">
+            <div class="card">
+                <!-- Timer -->
+                <div class="timer-section">
+                    <div class="timer-display">
+                        <span class="timer-label">⏱️ Pomodoro Timer:</span>
+                        <span id="timer" class="timer">25:00</span>
+                    </div>
+                    <button id="start-timer-btn" class="btn btn-small">Start Timer</button>
+                </div>
+
+                <!-- Level Info -->
+                <div class="level-info">
+                    <h2 id="level-title">Level Title</h2>
+                    <div class="summary-box">
+                        <h3>📖 Summary</h3>
+                        <p id="level-summary">Summary will appear here...</p>
+                    </div>
+                </div>
+
+                <!-- Questions Section -->
+                <div class="questions-section">
+                    <h3>❓ Questions</h3>
+                    <div id="question-container">
+                        <p id="current-question" class="question-text">Question will appear here...</p>
+                        
+                        <textarea id="answer-input" placeholder="Type your answer here..." rows="4"></textarea>
+                        
+                        <button id="submit-answer-btn" class="btn btn-primary">Submit Answer</button>
+                        
+                        <div id="answer-feedback" class="feedback"></div>
+                    </div>
+                </div>
+
+                <!-- Progress in Level -->
+                <div class="level-progress">
+                    <p>Question <span id="current-question-num">1</span> of <span id="total-questions">3</span></p>
+                    <div class="progress-bar">
+                        <div id="progress-fill" class="progress-fill"></div>
+                    </div>
+                </div>
+
+                <!-- Buttons -->
+                <div class="button-group">
+                    <button id="next-question-btn" class="btn btn-primary" style="display:none;">Next Question</button>
+                    <button id="complete-level-btn" class="btn btn-success" style="display:none;">Complete Level 🎉</button>
+                    <button id="back-to-levels-btn" class="btn btn-secondary">← Back to Levels</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Analytics Screen -->
+        <div id="analytics-screen" class="screen">
+            <div class="card">
+                <h2>📊 Your Learning Analytics</h2>
+                
+                <div id="analytics-data" class="analytics-grid"></div>
+                
+                <button id="export-csv-btn" class="btn btn-primary">Download CSV Report</button>
+                <button id="back-from-analytics-btn" class="btn btn-secondary">← Back to Levels</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

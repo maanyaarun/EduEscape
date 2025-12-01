@@ -1,0 +1,453 @@
+================================================================================
+                    EDUESCAPE - SETUP INSTRUCTIONS
+            Turn Your Textbooks Into Interactive Learning Games!
+                          (No AI Required!)
+================================================================================
+
+================================================================================
+1. PREREQUISITES (WHAT YOU NEED)
+================================================================================
+
+Before starting, make sure you have:
+
+✅ A computer running Windows, Mac, or Linux
+✅ Python 3.8 or higher installed
+✅ A web browser (Chrome, Firefox, Safari, or Edge)
+✅ A PDF textbook file to test with
+
+NOTE: This version does NOT require any API keys or AI services!
+It uses simple text processing to generate questions and summaries.
+
+================================================================================
+2. INSTALLATION STEPS
+================================================================================
+
+STEP 1: Install Python
+-----------------------
+If you don't have Python installed:
+
+For Windows:
+1. Go to https://www.python.org/downloads/
+2. Download the latest Python 3 installer
+3. Run the installer
+4. ⚠️ IMPORTANT: Check "Add Python to PATH" during installation
+5. Click "Install Now"
+
+For Mac:
+1. Open Terminal
+2. Run: brew install python3
+   (If you don't have Homebrew, install it from https://brew.sh)
+
+For Linux (Ubuntu/Debian):
+1. Open Terminal
+2. Run: sudo apt update
+3. Run: sudo apt install python3 python3-pip
+
+To verify Python is installed:
+- Open Terminal (Mac/Linux) or Command Prompt (Windows)
+- Type: python --version
+- You should see something like "Python 3.11.x"
+
+STEP 2: Download/Create the Project
+------------------------------------
+1. Create a folder called "eduescape" on your Desktop
+2. Inside "eduescape", create two folders:
+   - "backend"
+   - "frontend"
+3. Copy all the provided files into their respective folders
+
+Your structure should look like:
+/eduescape
+  /backend
+     main.py
+     content_generator.py
+     pdf_utils.py
+     progress.json
+     requirements.txt
+  /frontend
+     index.html
+     style.css
+     script.js
+  instructions.txt (this file)
+
+STEP 3: Install Python Dependencies
+------------------------------------
+1. Open Terminal (Mac/Linux) or Command Prompt (Windows)
+
+2. Navigate to the backend folder:
+   cd Desktop/eduescape/backend
+   (Adjust path based on where you created the folder)
+
+3. Install all required libraries:
+   pip install -r requirements.txt
+
+   This will install:
+   - FastAPI (the web framework)
+   - Uvicorn (the server)
+   - PyPDF2 (for reading PDFs)
+
+   ⏱️ This may take 1-2 minutes.
+
+4. Verify installation:
+   pip list
+   You should see fastapi, uvicorn, and PyPDF2 in the list.
+
+================================================================================
+3. RUNNING THE BACKEND SERVER
+================================================================================
+
+STEP 1: Navigate to Backend Folder
+-----------------------------------
+cd Desktop/eduescape/backend
+
+STEP 2: Start the Server
+-------------------------
+Run this command:
+
+uvicorn main:app --reload
+
+You should see output like:
+INFO:     Uvicorn running on http://127.0.0.1:8000 (Press CTRL+C to quit)
+INFO:     Started reloader process
+INFO:     Started server process
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+
+✅ Your backend is now running!
+
+What does this mean?
+- "uvicorn" is the server program
+- "main:app" tells it to run the "app" from "main.py"
+- "--reload" means it will restart automatically if you change the code
+- The server is running at http://127.0.0.1:8000 (also called localhost:8000)
+
+⚠️ Keep this terminal window open! Don't close it.
+
+STEP 3: Test the Backend
+-------------------------
+Open a new browser tab and go to:
+http://localhost:8000
+
+You should see:
+{"message":"Welcome to EduEscape API! Upload a PDF to get started."}
+
+✅ If you see this, your backend is working!
+
+To see all available API endpoints, go to:
+http://localhost:8000/docs
+
+This shows the interactive API documentation.
+
+================================================================================
+4. RUNNING THE FRONTEND
+================================================================================
+
+The frontend is just HTML/CSS/JavaScript files, so you don't need to install
+anything special. You just need to open the HTML file in a browser.
+
+OPTION 1: Simple File Opening (Recommended for Testing)
+--------------------------------------------------------
+1. Navigate to the frontend folder
+2. Find "index.html"
+3. Right-click on it
+4. Select "Open With" → Choose your browser (Chrome, Firefox, etc.)
+
+OPTION 2: Using Python's Built-in Server (Better for CORS)
+-----------------------------------------------------------
+1. Open a NEW terminal window (keep the backend terminal running!)
+
+2. Navigate to the frontend folder:
+   cd Desktop/eduescape/frontend
+
+3. Start a simple HTTP server:
+   
+   For Python 3:
+   python -m http.server 8080
+   
+   For Python 2 (if you have it):
+   python -m SimpleHTTPServer 8080
+
+4. Open your browser and go to:
+   http://localhost:8080
+
+✅ Your frontend is now running!
+
+OPTION 3: Using VS Code Live Server
+------------------------------------
+If you use Visual Studio Code:
+1. Install the "Live Server" extension
+2. Right-click on index.html
+3. Select "Open with Live Server"
+
+================================================================================
+5. TESTING THE APPLICATION
+================================================================================
+
+Now you have both backend and frontend running! Let's test each feature.
+
+TEST 1: Upload a PDF
+---------------------
+1. Open the frontend in your browser
+2. You should see the EduEscape homepage
+3. Click "Choose PDF File"
+4. Select a PDF textbook (any PDF with text will work)
+5. Click "Upload & Generate Levels"
+6. Wait 5-10 seconds (it's analyzing the PDF structure)
+7. You should see "Success! Generated X levels."
+
+✅ If this works, PDF processing is working!
+
+NOTE: The questions will be automatically generated based on the text content.
+They won't be as sophisticated as AI-generated questions, but they'll help
+with active recall learning!
+
+TEST 2: View Levels
+-------------------
+After uploading:
+1. You'll see a grid of level cards
+2. Level 1 should be unlocked (colored purple)
+3. Other levels should be locked (grayed out)
+
+✅ If you see levels, the backend and frontend are communicating!
+
+TEST 3: Play a Level
+--------------------
+1. Click on Level 1 (the unlocked one)
+2. You should see:
+   - A timer at the top
+   - A summary of the topic
+   - A question
+   - A text area to type your answer
+3. Click "Start Timer" - the timer should begin counting down
+4. Type an answer in the text area
+5. Click "Submit Answer"
+6. You should get feedback (correct or incorrect with a hint)
+
+✅ If this works, the game mechanics are working!
+
+TEST 4: Complete a Level
+-------------------------
+1. Answer all 3 questions correctly
+2. Click "Complete Level"
+3. You should see a success message with your stats
+4. Return to level selection
+5. Level 2 should now be unlocked
+
+✅ If this works, progression is working!
+
+TEST 5: View Analytics
+-----------------------
+1. From the level selection screen
+2. Click "View Analytics"
+3. You should see:
+   - Total levels
+   - Completed levels
+   - Recent activity table
+4. Click "Download CSV Report"
+5. Check the backend folder - you should see "eduescape_progress.csv"
+
+✅ If this works, analytics are working!
+
+================================================================================
+6. FULL WORKFLOW TEST
+================================================================================
+
+Here's a complete end-to-end test:
+
+1. START FRESH
+   - Click "Reset Progress" to start clean
+   - Upload a new PDF
+
+2. PLAY THROUGH THE GAME
+   - Start Level 1
+   - Start the Pomodoro timer
+   - Read the summary
+   - Answer the first question (include key terms from the summary)
+   - If wrong, read the hint and try again
+   - Complete all 3 questions
+   - Complete the level
+   - See Level 2 unlock
+
+3. CHECK PROGRESS
+   - Go to Analytics
+   - Verify your stats are correct
+   - Export CSV and check the file
+
+4. CONTINUE PLAYING
+   - Play Level 2
+   - Try getting an answer wrong on purpose to see hints
+   - Complete the level
+
+5. VERIFY DATA PERSISTENCE
+   - Close the browser
+   - Reopen the frontend
+   - Your progress should be saved!
+
+================================================================================
+7. TROUBLESHOOTING
+================================================================================
+
+PROBLEM: "Command 'python' not found"
+SOLUTION: 
+- On some systems, use "python3" instead of "python"
+- On Windows, you may need to use "py" instead
+- Make sure Python is added to your PATH
+
+PROBLEM: "Module not found" errors
+SOLUTION:
+- Make sure you ran "pip install -r requirements.txt"
+- Try: pip3 install -r requirements.txt
+- Or install individually: pip install fastapi uvicorn PyPDF2
+
+PROBLEM: "Address already in use" error
+SOLUTION:
+- Another program is using port 8000
+- Either stop that program, or use a different port:
+  uvicorn main:app --reload --port 8001
+- Then update the API_URL in script.js to http://localhost:8001
+
+PROBLEM: "CORS error" in browser console
+SOLUTION:
+- Use Option 2 to serve the frontend (Python HTTP server)
+- Or install a CORS browser extension
+
+PROBLEM: PDF upload fails
+SOLUTION:
+- Make sure the PDF is readable (not password-protected)
+- Check backend terminal for error messages
+- Try a different PDF file
+- The PDF must contain actual text (not just scanned images)
+
+PROBLEM: Frontend can't connect to backend
+SOLUTION:
+- Make sure backend is running (check terminal)
+- Make sure API_URL in script.js matches your backend URL
+- Try accessing http://localhost:8000 directly in browser
+
+PROBLEM: "No questions generated" or questions seem generic
+SOLUTION:
+- This is normal! Without AI, the questions are automatically generated
+  based on simple text processing rules
+- The questions will ask about the main topic and key terms found in the text
+- For better questions, make sure your PDF has clear, well-structured text
+
+PROBLEM: Answers marked wrong even when correct
+SOLUTION:
+- The answer checking is simple keyword matching
+- Try to include key terms from the topic in your answer
+- Look at the hints for guidance on what keywords to include
+
+================================================================================
+8. STOPPING THE APPLICATION
+================================================================================
+
+To stop the backend server:
+1. Go to the terminal running uvicorn
+2. Press CTRL+C
+3. You should see "Shutting down"
+
+To stop the frontend server (if using Option 2):
+1. Go to the terminal running http.server
+2. Press CTRL+C
+
+To restart:
+- Just run the uvicorn command again
+- And reopen the frontend
+
+================================================================================
+                            QUICK REFERENCE
+================================================================================
+
+Start Backend:
+cd Desktop/eduescape/backend
+uvicorn main:app --reload
+
+Start Frontend (Option 2):
+cd Desktop/eduescape/frontend
+python -m http.server 8080
+
+URLs:
+Backend API: http://localhost:8000
+Frontend: http://localhost:8080 (or file path)
+API Docs: http://localhost:8000/docs
+
+Common Commands:
+pip install -r requirements.txt    # Install dependencies
+pip list                           # List installed packages
+python --version                   # Check Python version
+
+================================================================================
+                        TESTING EACH ENDPOINT
+================================================================================
+
+You can test the backend API directly using the browser or tools like curl:
+
+1. Welcome Message:
+   http://localhost:8000/
+
+2. Upload PDF:
+   - Use the frontend (easiest)
+   - Or use API docs: http://localhost:8000/docs
+
+3. Get Levels:
+   http://localhost:8000/levels
+
+4. Get Level Details:
+   http://localhost:8000/level/0
+
+5. Analytics:
+   http://localhost:8000/analytics
+
+6. Export CSV:
+   http://localhost:8000/export-csv
+
+7. Reset Progress:
+   http://localhost:8000/reset-progress (POST request)
+
+================================================================================
+                     HOW THE QUESTION GENERATION WORKS
+================================================================================
+
+Since this version doesn't use AI, questions are generated using:
+
+1. KEYWORD EXTRACTION
+   - The system finds the most frequent important words in the text
+   - Common words like "the", "and", "is" are filtered out
+   - The top 5 keywords become the focus of questions
+
+2. SUMMARY CREATION
+   - Takes the first 3-4 sentences from the content
+   - This gives students a quick overview to study
+
+3. QUESTION TEMPLATES
+   - Question 1: Asks about the main focus of the topic
+   - Question 2: Asks about relationships between key concepts
+   - Question 3: Asks about real-world applications
+
+4. ANSWER CHECKING
+   - Looks for key terms from the expected answer in student's response
+   - If 30% or more of key terms match, answer is marked correct
+   - This is flexible enough to accept various phrasings
+
+5. HINTS
+   - Hint 1: Shows the key terms to focus on
+   - Hint 2: Reminds student to review the summary
+
+This approach works well for basic active recall practice, though it's
+simpler than AI-generated content.
+
+================================================================================
+                          THAT'S IT! 🎉
+================================================================================
+
+You now have a fully working EduEscape application WITHOUT needing any AI!
+
+If you encounter any issues:
+1. Check both terminal windows for error messages
+2. Look at the browser console (F12 → Console tab)
+3. Review the troubleshooting section above
+4. Make sure all files are in the correct folders
+
+Happy Learning! 🎮📚✨
+
+================================================================================
