@@ -37,5 +37,5 @@ EduEscape transforms an uploaded PDF into a sequence of timed escape-room levels
 
 To make studying **active**, **engaging**, and **fun** by turning notes into immersive escape-room challenges powered by AI.
 
-##This project is a submission to the Google x Kaggle Hackathon
+### This project is a submission to the Google x Kaggle Hackathon
 
